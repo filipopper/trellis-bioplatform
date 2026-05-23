@@ -1,0 +1,261 @@
+/* ══════════════════════════════════════════════════════════
+   ÁRBOL GENEALÓGICO — Filipovich™ Design System
+══════════════════════════════════════════════════════════ */
+
+/* ── WRAPPER ─────────────────────────────────────────────── */
+.gen-wrapper {
+  border: 0.5px solid var(--rule);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--ivory);
+  box-shadow: var(--shadow-sm);
+  margin-top: var(--sp-5);
+}
+
+/* ── TOOLBAR ─────────────────────────────────────────────── */
+.gen-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--white);
+  border-bottom: 0.5px solid var(--rule-lt);
+}
+.gen-toolbar-title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--s-dk);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: auto;
+}
+.gen-toolbar-title i { color: var(--c-base); font-size: 0.875rem; }
+.gen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 0.5px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--s-mid);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--ease);
+  line-height: 1;
+}
+.gen-btn i { font-size: 0.75rem; }
+.gen-btn:hover { border-color: var(--c-lt); color: var(--c-dp); background: var(--c-xpale); }
+
+/* ── CANVAS ──────────────────────────────────────────────── */
+.gen-canvas {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  background-color: #f7f5f6;
+  background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.gen-canvas:active { cursor: grabbing; }
+.gen-stage {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: 0 0;
+}
+
+/* ── SVG LÍNEAS ──────────────────────────────────────────── */
+.gen-svg {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.gen-line        { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+.gen-line-spouse { fill: none; stroke: var(--c-pale); stroke-width: 1.5; stroke-dasharray: 4 3; }
+
+/* ── TARJETA ─────────────────────────────────────────────── */
+.gen-card {
+  position: absolute;
+  width: 140px;
+  background: var(--white);
+  border: 0.5px solid var(--rule);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: box-shadow var(--ease), border-color var(--ease), transform var(--ease);
+  overflow: hidden;
+  user-select: none;
+}
+.gen-card:hover { border-color: var(--c-lt); box-shadow: var(--shadow-md); transform: translateY(-1px); z-index: 10; }
+.gen-card::before { content: ''; display: block; height: 3px; background: var(--s-lt); }
+.gen-card--male::before   { background: linear-gradient(90deg, #3b82f6, #93c5fd); }
+.gen-card--female::before { background: linear-gradient(90deg, #ec4899, #f9a8d4); }
+.gen-card--subject::before { background: linear-gradient(90deg, var(--c-dp), var(--c-base)); }
+
+.gen-card-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  margin: var(--sp-3) auto var(--sp-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--s-lt);
+  overflow: hidden;
+  border: 2px solid var(--rule-lt);
+}
+.gen-card--male   .gen-card-avatar { background: #3b82f6; border-color: #bfdbfe; }
+.gen-card--female .gen-card-avatar { background: #ec4899; border-color: #fbcfe8; }
+.gen-card--subject .gen-card-avatar { background: var(--c-dp); border-color: var(--c-pale); }
+.gen-card-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gen-card-name {
+  font-family: var(--ff-serif);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--s-dk);
+  text-align: center;
+  padding: 0 var(--sp-2) 2px;
+  line-height: 1.35;
+}
+.gen-card-role {
+  font-size: 0.5rem;
+  color: var(--c-base);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: center;
+  padding: 0 var(--sp-2) var(--sp-3);
+  line-height: 1.3;
+}
+
+/* ── PANEL LATERAL DE DETALLE ────────────────────────────── */
+.gen-panel-overlay { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+.gen-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: 220px;
+  height: 100%;
+  background: var(--white);
+  border-left: 0.5px solid var(--rule);
+  transform: translateX(100%);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: -4px 0 16px rgba(98,22,47,0.07);
+}
+.gen-panel.open { transform: translateX(0); }
+
+.gen-panel-head {
+  padding: var(--sp-4);
+  border-bottom: 0.5px solid var(--rule-lt);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+.gen-panel-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.gen-panel-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gen-panel-info { flex: 1; min-width: 0; }
+.gen-panel-name {
+  font-family: var(--ff-serif);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--s-dk);
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+.gen-panel-role {
+  font-size: 0.5rem;
+  color: var(--c-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.gen-panel-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--s-lt); font-size: 1rem; padding: 0;
+  transition: color var(--ease); flex-shrink: 0;
+}
+.gen-panel-close:hover { color: var(--s-dk); }
+
+.gen-panel-body { flex: 1; overflow-y: auto; padding: var(--sp-3) var(--sp-4); }
+.gen-panel-row {
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-2) 0;
+  border-bottom: 0.5px solid var(--rule-lt);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+.gen-panel-row:last-child { border-bottom: none; }
+.gen-panel-label { color: var(--s-mid); font-weight: 600; min-width: 42px; flex-shrink: 0; }
+.gen-panel-value { color: var(--s-dk); }
+.gen-panel-bio {
+  font-size: var(--fs-xs);
+  color: var(--s-mid);
+  line-height: 1.65;
+  padding-top: var(--sp-3);
+  font-style: italic;
+}
+
+/* ── LEYENDA ─────────────────────────────────────────────── */
+.gen-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 6px var(--sp-4);
+  background: var(--white);
+  border-top: 0.5px solid var(--rule-lt);
+  flex-wrap: wrap;
+}
+.gen-legend-item { display: flex; align-items: center; gap: 5px; font-size: var(--fs-2xs); color: var(--s-mid); }
+.gen-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.gen-legend-dot--m { background: #3b82f6; }
+.gen-legend-dot--f { background: #ec4899; }
+.gen-legend-dot--s { background: var(--c-dp); }
+.gen-legend-dash { width: 16px; height: 1.5px; background: var(--rule); }
+.gen-legend-dash--spouse {
+  background: repeating-linear-gradient(90deg, var(--c-lt) 0, var(--c-lt) 3px, transparent 3px, transparent 6px);
+}
+
+@media (max-width: 640px) {
+  .gen-canvas { height: 360px; }
+  .gen-panel  { width: 175px; }
+}
+
+/* ── ESTADO DE CARGA ─────────────────────────────────────── */
+.gen-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--s-mid);
+  font-weight: 500;
+}
+.gen-loading i {
+  font-size: 1rem;
+  color: var(--c-lt);
+  animation: gen-spin 1s linear infinite;
+}
+@keyframes gen-spin { to { transform: rotate(360deg); } }

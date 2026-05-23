@@ -1,0 +1,131 @@
+{
+  "_info": {
+    "description": "Árbol genealógico de Nicolás Filipovich. Agregar personas al array 'people'. Campos disponibles: id (único, requerido), name (requerido), fullName, gender ('male'|'female'|'unknown'), born, birthPlace, died, deathPlace, role, bio, photo, fatherID, motherID, spouseID, tags, isSubject.",
+    "version": "1.0",
+    "updated": "2026-03"
+  },
+
+  "people": [
+    {
+      "id": "nicolas",
+      "name": "Nicolás Filipovich",
+      "fullName": "Johan Nicolás Filipovich Perdomo",
+      "gender": "male",
+      "born": "24 jun. 2004",
+      "birthPlace": "Canelones, Uruguay",
+      "died": null,
+      "role": "Sujeto principal",
+      "bio": "Concejal del Municipio de Canelones 2025–2030, ad honórem. Paleolibertario y minarquista. Conocido digitalmente como Filipopper.",
+      "photo": "client/assets/img/example.webp",
+      "fatherID": "Fernando-Filipovich",
+      "motherID": "Sara-R-Perdomo",
+      "isSubject": true
+    },
+
+    {
+      "id": "Fernando-Filipovich",
+      "name": "Fernando Filipovich",
+      "fullName": "Fernando Filipovich Rodríguez",
+      "gender": "male",
+      "born": "27 mar. 1966",
+      "birthPlace": "Uruguay",
+      "died": null,
+      "role": "Padre",
+      "bio": "Descendiente de inmigrantes croatas llegados al Uruguay en el siglo XX.",
+      "fatherID": "Juan-B-Filipovich",
+      "motherID": "Blanca-M-Rodriguez",
+      "spouseID": "Sara-R-Perdomo"
+    },
+
+    {
+      "id": "Sara-R-Perdomo",
+      "name": "Sara Rodelí Perdomo",
+      "fullName": "Sara Rodelí Perdomo",
+      "gender": "female",
+      "born": "27 abr. 1969",
+      "birthPlace": "Uruguay",
+      "died": null,
+      "role": "Madre",
+      "bio": "Pertenece a la familia Perdomo, con larga trayectoria política en Canelones.",
+      "fatherID": "abuelo-mat",
+      "motherID": "abuela-mat",
+      "spouseID": "Fernando-Filipovich"
+    },
+
+    {
+      "id": "Juan-B-Filipovich",
+      "name": "Juan Boian Filipovich",
+      "fullName": "Juan Boian Filipovich González",
+      "gender": "male",
+      "born": "23 nov. 1940",
+      "birthPlace": "Uruguay",
+      "died": "2006",
+      "role": "Abuelo paterno",
+      "bio": null,
+      "spouseID": "Blanca-M-Rodriguez"
+    },
+
+    {
+      "id": "Blanca-M-Rodriguez",
+      "name": "Blanca Margarita Rodríguez",
+      "fullName": "Blanca Margarita Rodríguez",
+      "gender": "female",
+      "born": "27 sep. 1943",
+      "birthPlace": "Uruguay",
+      "died": "1990",
+      "role": "Abuela paterna",
+      "bio": null,
+      "spouseID": "Juan-B-Filipovich"
+    },
+
+    {
+      "id": "abuelo-mat",
+      "name": "Abuelo Perdomo",
+      "fullName": "Abuelo Perdomo (materno)",
+      "gender": "male",
+      "born": null,
+      "birthPlace": "Canelones, Uruguay",
+      "died": null,
+      "role": "Abuelo materno",
+      "bio": null,
+      "spouseID": "abuela-mat"
+    },
+
+    {
+      "id": "abuela-mat",
+      "name": "Abuela Perdomo",
+      "fullName": "Abuela Perdomo (materna)",
+      "gender": "female",
+      "born": null,
+      "birthPlace": "Canelones, Uruguay",
+      "died": null,
+      "role": "Abuela materna",
+      "bio": null,
+      "spouseID": "abuelo-mat"
+    },
+
+    {
+      "id": "guillermo-perdomo",
+      "name": "Guillermo Perdomo",
+      "fullName": "Guillermo Perdomo",
+      "gender": "male",
+      "born": null,
+      "birthPlace": "Uruguay",
+      "died": null,
+      "role": "Tatarabuelo materno",
+      "bio": "Edil, diputado en dos legislaturas y fundador del movimiento político «Por la Patria»."
+    },
+
+    {
+      "id": "alberto-perdomo",
+      "name": "Alberto Perdomo Gamarra",
+      "fullName": "Alberto Perdomo Gamarra",
+      "gender": "male",
+      "born": null,
+      "birthPlace": "Uruguay",
+      "died": null,
+      "role": "Tío segundo (político)",
+      "bio": "Diputado en tres períodos consecutivos y presidente de la Cámara de Representantes durante 2008–2009."
+    }
+  ]
+}

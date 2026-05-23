@@ -1,0 +1,12 @@
+{
+  "posts": ["build_my_own_cpu", "bios_vs_uefi"],
+  "urgencyBanner": {
+    "active": true,
+    "type": "election",
+    "title": "¡Elecciones municipales el 12 de octubre!",
+    "body": "Recordá llevar tu documento de identidad. Los locales de votación abren a las 8:00.",
+    "cta": { "label": "Ver locales de votación", "url": "https://www.corteelectoral.gub.uy/" },
+    "expiresAt": "2026-10-13",
+    "color": "crimson"
+  }
+}

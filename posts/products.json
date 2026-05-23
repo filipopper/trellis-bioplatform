@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Taza cerámica",
+    "baseImage": "client/assets/img/product-placeholder.svg",
+    "description": "Taza de cerámica de alta calidad con diseño exclusivo del movimiento",
+    "price": 800,
+    "variations": [
+      { "name": "diseño", "required": true, "options": [
+        {"name":"Nicolás Filipovich","image":""},
+        {"name":"Con logo","image":""},
+        {"name":"Blanca","image":""}
+      ]},
+      { "name": "tamaño", "required": true, "options": [
+        {"name":"Standard","image":""},
+        {"name":"Grande","image":""}
+      ]}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Gorra",
+    "baseImage": "client/assets/img/gorra-base.webp",
+    "description": "Gorra con logo bordado de alta calidad en la parte frontal",
+    "price": 500,
+    "variations": [
+      { "name": "color", "required": true, "options": [
+        {"name":"Negro","image":"client/assets/img/gorra-negra.webp"},
+        {"name":"Blanco","image":"client/assets/img/gorra-blanca.webp"}
+      ]}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Stickers · 50 unidades",
+    "baseImage": "client/assets/img/stickers.webp",
+    "description": "Pack de 50 stickers de alta calidad surtidos con diseños exclusivos",
+    "price": 60,
+    "variations": []
+  }
+]

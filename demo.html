@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urgency Banner Demo — All Customization Options</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="public/css/core/variables.css" />
+    <link rel="stylesheet" href="public/css/header.css" />
+    <link rel="stylesheet" href="public/css/urgency-banner.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: #faf8f5;
+        color: #433f45;
+        line-height: 1.6;
+      }
+      
+      .demo-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+      
+      .demo-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 2.5rem;
+        color: #62162f;
+        margin-bottom: 1rem;
+      }
+      
+      .demo-description {
+        font-size: 1.125rem;
+        color: #6b6770;
+        margin-bottom: 3rem;
+      }
+      
+      .controls-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      .control-section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(98, 22, 47, 0.08);
+      }
+      
+      .control-section h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: #62162f;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+      
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .demo-btn {
+        padding: 0.5rem 1rem;
+        background: #96305a;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      
+      .demo-btn:hover {
+        background: #62162f;
+        transform: translateY(-1px);
+      }
+      
+      .demo-btn.secondary {
+        background: #228e67;
+      }
+      
+      .demo-btn.secondary:hover {
+        background: #145a40;
+      }
+      
+      .demo-input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d4c8ce;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .demo-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #433f45;
+        margin-bottom: 0.25rem;
+      }
+      
+      .color-input-group {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+      
+      .color-picker {
+        width: 50px;
+        height: 38px;
+        border: 1px solid #d4c8ce;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .code-block {
+        background: #f4f3f5;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-top: 2rem;
+        overflow-x: auto;
+      }
+      
+      .code-block pre {
+        font-family: "Courier New", monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #433f45;
+      }
+      
+      .banner-spacer {
+        height: 100px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Urgency Banner -->
+    <div id="urgency-banner" role="alert" aria-live="polite">
+      <div class="urgency-inner">
+        <div class="urgency-icon">
+          <i class="ri-alarm-warning-line"></i>
+        </div>
+        <div class="urgency-content">
+          <strong class="urgency-title">¡Elecciones municipales el 12 de octubre!</strong>
+          <span class="urgency-body">Recordá llevar tu documento de identidad. Los locales de votación abren a las 8:00.</span>
+        </div>
+        <a href="https://www.corteelectoral.gub.uy/" target="_blank" rel="noopener" class="urgency-cta">
+          Ver locales de votación
+          <i class="ri-external-link-line"></i>
+        </a>
+        <button class="urgency-close" id="urgency-close" aria-label="Cerrar aviso">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="demo-container">
+      <h1 class="demo-title">🎨 Urgency Banner Customization Demo</h1>
+      <p class="demo-description">
+        Explore all customization options for the enhanced urgency banner. 
+        Click the buttons below to see real-time changes.
+      </p>
+      
+      <div class="controls-grid">
+        <!-- Presets -->
+        <div class="control-section">
+          <h3>📦 Presets</h3>
+          <div class="btn-group">
+            <button class="demo-btn" onclick="applyPreset('election')">Election</button>
+            <button class="demo-btn" onclick="applyPreset('success')">Success</button>
+            <button class="demo-btn" onclick="applyPreset('urgent')">Urgent</button>
+            <button class="demo-btn" onclick="applyPreset('info')">Info</button>
+          </div>
+          <p style="font-size: 0.75rem; color: #6b6770; margin-top: 0.5rem;">
+            Quick preset configurations for common use cases
+          </p>
+        </div>
+        
+        <!-- Colors -->
+        <div class="control-section">
+          <h3>🎨 Colors</h3>
+          <div class="color-input-group">
+            <input type="text" class="demo-input" id="bg-color" value="#62162f" />
+            <input type="color" class="color-picker" id="bg-color-picker" value="#62162f" />
+          </div>
+          <button class="demo-btn" onclick="updateColors()">Apply Custom Colors</button>
+        </div>
+        
+        <!-- Animations -->
+        <div class="control-section">
+          <h3>✨ Animations</h3>
+          <div class="btn-group">
+            <button class="demo-btn" onclick="setAnimation('none')">None</button>
+            <button class="demo-btn" onclick="setAnimation('gradient')">Gradient</button>
+            <button class="demo-btn" onclick="setAnimation('shimmer')">Shimmer</button>
+          </div>
+        </div>
+        
+        <!-- Icon Variants -->
+        <div class="control-section">
+          <h3>🎯 Icon Variants</h3>
+          <div class="btn-group">
+            <button class="demo-btn" onclick="setIconVariant('default')">Default</button>
+            <button class="demo-btn secondary" onclick="setIconVariant('success')">Success</button>
+            <button class="demo-btn" onclick="setIconVariant('warning')">Warning</button>
+            <button class="demo-btn" onclick="setIconVariant('danger')">Danger</button>
+            <button class="demo-btn" onclick="setIconVariant('info')">Info</button>
+          </div>
+        </div>
+        
+        <!-- CTA Variants -->
+        <div class="control-section">
+          <h3>🔘 CTA Button</h3>
+          <div class="btn-group">
+            <button class="demo-btn" onclick="setCtaVariant('default')">Default</button>
+            <button class="demo-btn" onclick="setCtaVariant('primary')">Primary</button>
+            <button class="demo-btn secondary" onclick="setCtaVariant('secondary')">Secondary</button>
+          </div>
+        </div>
+        
+        <!-- Background Photo -->
+        <div class="control-section">
+          <h3>🖼️ Background Photo</h3>
+          <label class="demo-label">Photo URL:</label>
+          <input 
+            type="text" 
+            class="demo-input" 
+            id="photo-url" 
+            placeholder="Enter image URL"
+          />
+          <label class="demo-label">Opacity:</label>
+          <input 
+            type="range" 
+            class="demo-input" 
+            id="photo-opacity" 
+            min="0" 
+            max="1" 
+            step="0.05" 
+            value="0.15"
+          />
+          <div class="btn-group">
+            <button class="demo-btn" onclick="applyPhoto()">Apply Photo</button>
+            <button class="demo-btn secondary" onclick="removePhoto()">Remove</button>
+          </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="control-section">
+          <h3>📝 Content</h3>
+          <label class="demo-label">Title:</label>
+          <input 
+            type="text" 
+            class="demo-input" 
+            id="content-title" 
+            value="¡Elecciones municipales el 12 de octubre!"
+          />
+          <label class="demo-label">Body:</label>
+          <input 
+            type="text" 
+            class="demo-input" 
+            id="content-body" 
+            value="Recordá llevar tu documento de identidad."
+          />
+          <label class="demo-label">CTA Text:</label>
+          <input 
+            type="text" 
+            class="demo-input" 
+            id="content-cta" 
+            value="Ver locales de votación"
+          />
+          <button class="demo-btn" onclick="updateContent()">Update Content</button>
+        </div>
+        
+        <!-- Visibility Controls -->
+        <div class="control-section">
+          <h3>👁️ Visibility</h3>
+          <div class="btn-group">
+            <button class="demo-btn" onclick="window.urgencyBanner.show()">Show</button>
+            <button class="demo-btn" onclick="window.urgencyBanner.hide()">Hide</button>
+            <button class="demo-btn secondary" onclick="resetBanner()">Reset All</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Code Example -->
+      <div class="code-block">
+        <h3 style="margin-bottom: 1rem;">📋 Current Configuration</h3>
+        <pre id="code-output">// Click buttons above to see the code</pre>
+      </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="public/js/urgency-banner.js"></script>
+    <script>
+      // Demo functions
+      let currentConfig = {};
+      
+      function applyPreset(preset) {
+        window.urgencyBanner.applyPreset(preset);
+        currentConfig = { preset };
+        updateCodeOutput();
+      }
+      
+      function updateColors() {
+        const bgColor = document.getElementById('bg-color').value;
+        window.urgencyBanner.setColors({
+          background: bgColor
+        });
+        currentConfig.colors = { background: bgColor };
+        updateCodeOutput();
+      }
+      
+      function setAnimation(type) {
+        window.urgencyBanner.setAnimation(type);
+        if (type === 'gradient') {
+          window.urgencyBanner.setGradientColors('#62162f', '#96305a', '#ba577e');
+        }
+        currentConfig.animation = type;
+        updateCodeOutput();
+      }
+      
+      function setIconVariant(variant) {
+        window.urgencyBanner.setIconVariant(variant);
+        currentConfig.iconVariant = variant;
+        updateCodeOutput();
+      }
+      
+      function setCtaVariant(variant) {
+        window.urgencyBanner.setCtaVariant(variant);
+        currentConfig.ctaVariant = variant;
+        updateCodeOutput();
+      }
+      
+      function applyPhoto() {
+        const url = document.getElementById('photo-url').value;
+        const opacity = parseFloat(document.getElementById('photo-opacity').value);
+        if (url) {
+          window.urgencyBanner.setBackgroundPhoto(url, opacity);
+          currentConfig.photo = { url, opacity };
+          updateCodeOutput();
+        }
+      }
+      
+      function removePhoto() {
+        window.urgencyBanner.removeBackgroundPhoto();
+        delete currentConfig.photo;
+        updateCodeOutput();
+      }
+      
+      function updateContent() {
+        const title = document.getElementById('content-title').value;
+        const body = document.getElementById('content-body').value;
+        const cta = document.getElementById('content-cta').value;
+        
+        window.urgencyBanner.setContent({
+          title,
+          body,
+          ctaText: cta
+        });
+        
+        currentConfig.content = { title, body, ctaText: cta };
+        updateCodeOutput();
+      }
+      
+      function resetBanner() {
+        window.location.reload();
+      }
+      
+      function updateCodeOutput() {
+        let code = 'window.urgencyBanner';
+        
+        if (currentConfig.preset) {
+          code += `\n  .applyPreset('${currentConfig.preset}')`;
+        }
+        
+        if (currentConfig.colors) {
+          code += `\n  .setColors(${JSON.stringify(currentConfig.colors, null, 2)})`;
+        }
+        
+        if (currentConfig.animation) {
+          code += `\n  .setAnimation('${currentConfig.animation}')`;
+          if (currentConfig.animation === 'gradient') {
+            code += `\n  .setGradientColors('#62162f', '#96305a', '#ba577e')`;
+          }
+        }
+        
+        if (currentConfig.iconVariant) {
+          code += `\n  .setIconVariant('${currentConfig.iconVariant}')`;
+        }
+        
+        if (currentConfig.ctaVariant) {
+          code += `\n  .setCtaVariant('${currentConfig.ctaVariant}')`;
+        }
+        
+        if (currentConfig.photo) {
+          code += `\n  .setBackgroundPhoto('${currentConfig.photo.url}', ${currentConfig.photo.opacity})`;
+        }
+        
+        if (currentConfig.content) {
+          code += `\n  .setContent(${JSON.stringify(currentConfig.content, null, 2)})`;
+        }
+        
+        code += ';';
+        
+        document.getElementById('code-output').textContent = code;
+      }
+      
+      // Sync color picker with text input
+      document.getElementById('bg-color-picker').addEventListener('input', (e) => {
+        document.getElementById('bg-color').value = e.target.value;
+      });
+      
+      document.getElementById('bg-color').addEventListener('input', (e) => {
+        document.getElementById('bg-color-picker').value = e.target.value;
+      });
+      
+      // Show initial code
+      updateCodeOutput();
+    </script>
+  </body>
+</html>

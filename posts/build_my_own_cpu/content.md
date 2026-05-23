@@ -1,0 +1,3 @@
+# Build My Own CPU 2
+
+Heyoo! In this post, we'll delve into the technical workings of a microprocessor 2222...
