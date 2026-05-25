@@ -1,0 +1,12 @@
+{
+  "slug": "bios-vs-uefi",
+  "title": "BIOS vs UEFI",
+  "description": "Comparativa de modelos de firmware para el arranque de computadoras.",
+  "verifiedLabel": "Artículo técnico",
+  "updatedLabel": "Actualizado may. 2026",
+  "toc": [
+    { "id": "origen", "label": "Origen" },
+    { "id": "diferencias", "label": "Diferencias" },
+    { "id": "transicion", "label": "Transición" }
+  ]
+}
