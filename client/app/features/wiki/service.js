@@ -26,7 +26,10 @@ function parseInlineMarkdown(text = '') {
   return text
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    .replace(
+      /\[(.+?)\]\((.+?)\)/g,
+      '<a href="$2" target="_blank" rel="noopener">$1</a>'
+    );
 }
 
 function transformWikiLinks(markdown = '') {
@@ -46,10 +49,24 @@ function transformWikiLinks(markdown = '') {
         { label }
       );
 
-      return `<span class="wiki-bad-link" title="Referencia no encontrada">${label}</span>`;
+      return `
+        <span
+          class="wiki-bad-link"
+          title="Referencia no encontrada"
+        >
+          ${label}
+        </span>
+      `;
     }
 
-    return `<a href="#/wiki/${slug}" data-wiki-link="${slug}">${label}</a>`;
+    return `
+      <a
+        href="#/wiki/${slug}"
+        data-wiki-link="${slug}"
+      >
+        ${label}
+      </a>
+    `;
   });
 }
 
@@ -84,7 +101,9 @@ function markdownToHtml(markdown = '') {
 
       blocks.push(
         `<section class="wiki-sec"${id ? ` id="${id}"` : ''}>`
-        + `<h2 class="wiki-sec-title">${parseInlineMarkdown(title || '')}</h2>`
+        + `<h2 class="wiki-sec-title">${
+          parseInlineMarkdown(title || '')
+        }</h2>`
       );
 
       continue;
@@ -94,7 +113,9 @@ function markdownToHtml(markdown = '') {
       const title = trimmed.replace(/^###\s+/, '');
 
       blocks.push(
-        `<h3 class="wiki-subsec-title">${parseInlineMarkdown(title)}</h3>`
+        `<h3 class="wiki-subsec-title">${
+          parseInlineMarkdown(title)
+        }</h3>`
       );
 
       continue;
@@ -117,7 +138,9 @@ function markdownToHtml(markdown = '') {
       }
 
       blocks.push(
-        `<li>${parseInlineMarkdown(trimmed.replace(/^-\s+/, ''))}</li>`
+        `<li>${
+          parseInlineMarkdown(trimmed.replace(/^-\s+/, ''))
+        }</li>`
       );
 
       continue;
@@ -148,6 +171,29 @@ export class WikiService {
     return ARTICLE_META_BY_SLUG[slug] || null;
   }
 
+  getExploreArticles(currentSlug, limit = 6) {
+    const current = this.getArticleMeta(currentSlug);
+
+    const related = (current?.related || [])
+      .map((slug) => this.getArticleMeta(slug))
+      .filter(Boolean);
+
+    const remaining = wikiRegistry.articles.filter(
+      (article) =>
+        article.slug !== currentSlug
+        && !related.some((relatedItem) => relatedItem.slug === article.slug)
+    );
+
+    return [
+      current,
+      ...related,
+      ...remaining,
+    ]
+      .filter(Boolean)
+      .slice(0, limit)
+      .map((article) => ({ ...article }));
+  }
+
   resolveInternalReference(label) {
     const normalizedLabel = normalize(label);
 
@@ -156,6 +202,10 @@ export class WikiService {
       || ARTICLE_TITLE_INDEX[normalizedLabel]
       || null
     );
+  }
+
+  markdownToHtml(markdown = '') {
+    return markdownToHtml(markdown);
   }
 
   async loadArticle(slug) {
@@ -201,7 +251,7 @@ export class WikiService {
         slug: normalizedSlug,
         meta,
         articleData,
-        contentHtml: markdownToHtml(markdown),
+        contentHtml: this.markdownToHtml(markdown),
       };
     } catch (error) {
       reportError(

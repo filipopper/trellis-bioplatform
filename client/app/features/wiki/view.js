@@ -25,6 +25,11 @@ export class WikiView {
       .map((slug) => this.service.getArticleMeta(slug))
       .filter(Boolean);
 
+    const exploreArticles = this.service.getExploreArticles(
+      meta.slug,
+      6
+    );
+
     this.content.innerHTML = `
       <div class="about-page slide-in">
         <div class="wiki-layout">
@@ -75,6 +80,28 @@ export class WikiView {
           </aside>
 
           <article class="wiki-article">
+
+            <nav
+              class="wiki-article-nav"
+              aria-label="Explorar artículos"
+            >
+              ${
+                exploreArticles.map((article) => `
+                  <a
+                    class="wiki-article-chip${
+                      article.slug === meta.slug
+                        ? ' active'
+                        : ''
+                    }"
+                    href="#/wiki/${article.slug}"
+                    data-wiki-link="${article.slug}"
+                  >
+                    ${article.title}
+                  </a>
+                `).join('')
+              }
+            </nav>
+
             <div class="wiki-eyebrow-row">
               <span class="wiki-eyebrow-chip">
                 <i class="ri-verified-badge-line"></i>
@@ -120,6 +147,7 @@ export class WikiView {
             </nav>
 
             ${contentHtml}
+
           </article>
 
         </div>
