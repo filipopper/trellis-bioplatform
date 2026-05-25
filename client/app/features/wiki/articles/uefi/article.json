@@ -1,0 +1,11 @@
+{
+  "slug": "uefi",
+  "title": "UEFI",
+  "description": "Estándar de firmware moderno que reemplaza progresivamente al BIOS.",
+  "verifiedLabel": "Documento técnico",
+  "updatedLabel": "Actualizado may. 2026",
+  "toc": [
+    { "id": "vision", "label": "Visión general" },
+    { "id": "adopcion", "label": "Adopción" }
+  ]
+}

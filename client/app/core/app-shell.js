@@ -138,7 +138,7 @@ export class AppShell {
       } else {
         await safeAsync(
           'controller.init',
-          () => init.call(controller),
+          () => init.call(controller, { viewId: resolvedViewId, postId }),
           null,
           { viewId: resolvedViewId }
         );
@@ -146,7 +146,7 @@ export class AppShell {
     } else {
       await safeAsync(
         'controller.init',
-        () => init.call(controller),
+        () => init.call(controller, { viewId: resolvedViewId, postId }),
         null,
         { viewId: resolvedViewId }
       );

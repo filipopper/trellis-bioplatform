@@ -3,7 +3,8 @@ import { reportError, reportWarning } from '../runtime-errors.js';
 const FEATURE_MODULES = Object.freeze({
   home: '../../features/home/controller.js',
   news: '../../features/news/controller.js',
-  about: '../../features/about/controller.js',
+  about: '../../features/wiki/controller.js',
+  wiki: '../../features/wiki/controller.js',
   contact: '../../features/contact/controller.js',
   store: '../../features/store/controller.js',
   proposals: '../../features/proposals/controller.js',
@@ -14,7 +15,8 @@ const FEATURE_MODULES = Object.freeze({
 const FEATURE_EXPORTS = Object.freeze({
   home: 'HomeController',
   news: 'NewsController',
-  about: 'AboutController',
+  about: 'WikiController',
+  wiki: 'WikiController',
   contact: 'ContactController',
   store: 'StoreController',
   proposals: 'ProposalsController',
