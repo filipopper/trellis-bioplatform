@@ -1,5 +1,6 @@
 import { reportError, reportWarning } from '../../core/runtime-errors.js';
 import { wikiRegistry } from './registry.js';
+import { resolveWikiResourceUrl } from './wiki-paths.js';
 
 const normalize = (value = '') => value.trim().toLowerCase();
 
@@ -181,7 +182,9 @@ export class WikiService {
     const remaining = wikiRegistry.articles.filter(
       (article) =>
         article.slug !== currentSlug
-        && !related.some((relatedItem) => relatedItem.slug === article.slug)
+        && !related.some(
+          (relatedItem) => relatedItem.slug === article.slug
+        )
     );
 
     return [
@@ -208,8 +211,26 @@ export class WikiService {
     return markdownToHtml(markdown);
   }
 
+  buildArticleResourceUrls(slug) {
+    const articleUrl = resolveWikiResourceUrl(
+      slug,
+      'article.json'
+    );
+
+    const contentUrl = resolveWikiResourceUrl(
+      slug,
+      'content.md'
+    );
+
+    return {
+      articleUrl,
+      contentUrl,
+    };
+  }
+
   async loadArticle(slug) {
     const normalizedSlug = slug || this.getDefaultSlug();
+
     const meta = this.getArticleMeta(normalizedSlug);
 
     if (!meta) {
@@ -219,10 +240,33 @@ export class WikiService {
       };
     }
 
+    const {
+      articleUrl,
+      contentUrl,
+    } = this.buildArticleResourceUrls(normalizedSlug);
+
+    if (!articleUrl || !contentUrl) {
+      reportWarning(
+        'wiki.service.loadArticle',
+        'Wiki resource URL resolution failed',
+        {
+          slug: normalizedSlug,
+          articleUrl,
+          contentUrl,
+        }
+      );
+
+      return {
+        kind: 'error',
+        slug: normalizedSlug,
+        meta,
+      };
+    }
+
     try {
       const [articleRes, contentRes] = await Promise.all([
-        fetch(meta.dataPath),
-        fetch(meta.contentPath),
+        fetch(articleUrl),
+        fetch(contentUrl),
       ]);
 
       if (!articleRes.ok || !contentRes.ok) {
@@ -233,6 +277,8 @@ export class WikiService {
             slug: normalizedSlug,
             articleStatus: articleRes.status,
             contentStatus: contentRes.status,
+            articleUrl,
+            contentUrl,
           }
         );
 
@@ -243,8 +289,47 @@ export class WikiService {
         };
       }
 
-      const articleData = await articleRes.json();
-      const markdown = await contentRes.text();
+      let articleData;
+
+      try {
+        articleData = await articleRes.json();
+      } catch (error) {
+        reportError(
+          'wiki.service.loadArticle.parseArticleJson',
+          error,
+          {
+            slug: normalizedSlug,
+            articleUrl,
+          }
+        );
+
+        return {
+          kind: 'error',
+          slug: normalizedSlug,
+          meta,
+        };
+      }
+
+      let markdown;
+
+      try {
+        markdown = await contentRes.text();
+      } catch (error) {
+        reportError(
+          'wiki.service.loadArticle.readContentMarkdown',
+          error,
+          {
+            slug: normalizedSlug,
+            contentUrl,
+          }
+        );
+
+        return {
+          kind: 'error',
+          slug: normalizedSlug,
+          meta,
+        };
+      }
 
       return {
         kind: 'ok',
@@ -255,9 +340,13 @@ export class WikiService {
       };
     } catch (error) {
       reportError(
-        'wiki.service.loadArticle',
+        'wiki.service.loadArticle.fetchResources',
         error,
-        { slug: normalizedSlug }
+        {
+          slug: normalizedSlug,
+          articleUrl,
+          contentUrl,
+        }
       );
 
       return {

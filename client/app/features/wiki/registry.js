@@ -1,5 +1,5 @@
 export const wikiRegistry = Object.freeze({
-  version: 2,
+  version: 3,
   defaultSlug: 'nicolas-filipovich',
 
   articles: [
