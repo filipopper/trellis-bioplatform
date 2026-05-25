@@ -4,7 +4,9 @@ import { WikiService } from './service.js';
 export class WikiController {
   constructor() {
     this.service = new WikiService();
-    this.view = new WikiView({ service: this.service });
+    this.view = new WikiView({
+      service: this.service,
+    });
   }
 
   async init(route = {}) {
