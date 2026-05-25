@@ -12,6 +12,8 @@ Comenzó su actividad política en 2023 afiliándose al **Partido Nacional** baj
 
 Integra el Vértice Productivo Ambiental, Institucional, Social y Territorial del municipio, ejerciendo la función de manera *ad honórem*.
 
+Se identifica con corrientes como [[Market Anarchism]] y mantiene interés técnico en [[BIOS vs UEFI]].
+
 > «Libertad, orden y responsabilidad: el camino hacia una sociedad próspera.»
 
 ## Distinciones {#wiki-distinciones}
