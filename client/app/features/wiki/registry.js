@@ -1,6 +1,7 @@
 export const wikiRegistry = Object.freeze({
   version: 3,
   defaultSlug: 'nicolas-filipovich',
+
   articles: [
     {
       slug: 'nicolas-filipovich',
@@ -12,8 +13,12 @@ export const wikiRegistry = Object.freeze({
       tags: ['perfil', 'politica', 'uruguay'],
       category: 'biografia',
       related: ['bios-vs-uefi', 'market-anarchism'],
-      updatedAt: '2026-07-01'
+      contentPath: './articles/nicolas-filipovich/content.md',
+      dataPath: './articles/nicolas-filipovich/article.json',
+      featured: true,
+      updatedAt: '2026-07-01',
     },
+
     {
       slug: 'bios-vs-uefi',
       title: 'BIOS vs UEFI',
@@ -23,8 +28,11 @@ export const wikiRegistry = Object.freeze({
       tags: ['hardware', 'firmware'],
       category: 'tecnologia',
       related: ['uefi'],
-      updatedAt: '2026-05-10'
+      contentPath: './articles/bios-vs-uefi/content.md',
+      dataPath: './articles/bios-vs-uefi/article.json',
+      updatedAt: '2026-05-10',
     },
+
     {
       slug: 'uefi',
       title: 'UEFI',
@@ -34,8 +42,11 @@ export const wikiRegistry = Object.freeze({
       tags: ['hardware', 'arranque'],
       category: 'tecnologia',
       related: ['bios-vs-uefi'],
-      updatedAt: '2026-05-10'
+      contentPath: './articles/uefi/content.md',
+      dataPath: './articles/uefi/article.json',
+      updatedAt: '2026-05-10',
     },
+
     {
       slug: 'market-anarchism',
       title: 'Market Anarchism',
@@ -45,7 +56,9 @@ export const wikiRegistry = Object.freeze({
       tags: ['politica', 'filosofia'],
       category: 'ideas',
       related: ['nicolas-filipovich'],
-      updatedAt: '2026-05-10'
-    }
-  ]
+      contentPath: './articles/market-anarchism/content.md',
+      dataPath: './articles/market-anarchism/article.json',
+      updatedAt: '2026-05-10',
+    },
+  ],
 });
